@@ -1,16 +1,48 @@
-# news_homework
+# News homework - RatNews
 
-A new Flutter project.
+Приложение, написанное на flutter, позволяющее просматривать новости, полученные с помощью [newsAPI](https://newsapi.org/).
 
-## Getting Started
+## Описание
 
-This project is a starting point for a Flutter application.
+Приложение представляет собой ленту новостей по нескольким категориям и страницу каждой новости, на которую можно попасть, нажав по ее карточке в ленте.
+Выбор категории сделан через кнопки в верхней части главного экрана.
 
-A few resources to get you started if this is your first Flutter project:
+## Работа с данными
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Данные получаются из newsAPI. Используется библиотека Http для запросов и синтаксиса async await.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Что реальзовано?
+
+- Работа с API
+- 2 экрана просмотра новостей
+- Поддержан функционал смены темы
+
+## Запуск
+
+```terminal
+flutter pub get
+```
+
+```terminal
+dart run build_runner build 
+```
+
+```terminal
+flutter run
+```
+
+## Скриншоты
+
+### Лента (основной экран):
+
+![Лента](./screenshots/first.jpg)
+
+### Страница с новостями одной категории (тёмная тема):
+
+![Страница_категории](./screenshots/second.jpg)
+
+
+### Страница новости:
+
+![Страница новости](./screenshots/third.jpg)
