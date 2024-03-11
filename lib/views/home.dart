@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
             children: [
               Row(
                 children: <Widget>[
-                  Text("Ratten"),
+                  Text("Rat"),
                   Text(
                     "News",
                     style: TextStyle(color: primaryColor),

@@ -20,6 +20,7 @@ class _CategoryNewsState extends State<CategoryNews> {
   late final List<ArticleModel> articles;
   bool _loading = true;
 
+
   @override
   void initState() {
     super.initState();
@@ -39,16 +40,18 @@ class _CategoryNewsState extends State<CategoryNews> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Text("Ratten"),
-                Text(
+                const Text("Rat"),
+                const Text(
                   "News",
                   style: TextStyle(color: primaryColor),
-                )
+                ),
+                const Text(": "),
+                Text(widget.category),
               ],
             ),
             ToggleThemeButton(),

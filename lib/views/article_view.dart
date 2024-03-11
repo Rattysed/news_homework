@@ -4,6 +4,13 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:news_homework/widgets/error_image.dart';
 import "package:news_homework/widgets/theme_button.dart";
 
+String cutTitle(String title, [int length = 10]) {
+  if (title.length <= length + 3) {
+    return title;
+  }
+  return "${title.substring(0, length)}...";
+}
+
 class ArticleView extends StatelessWidget {
   final String imageUrl;
   final String title;
@@ -29,17 +36,17 @@ class ArticleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: const Row(
+            title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Feed",
-                    style: TextStyle(color: primaryColor)),
+                Text(cutTitle(title, 13),
+                    style: const TextStyle(color: primaryColor)),
               ],
             ),
-            ToggleThemeButton()
+            const ToggleThemeButton()
           ],
         )),
         body: SingleChildScrollView(
