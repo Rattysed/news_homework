@@ -63,23 +63,3 @@ class _ArticleViewState extends State<ArticleView> {
     ),
   );
 }
-
-class ArticleView2 extends StatelessWidget {
-
-  final String blogUrl;
-
-  const ArticleView2({super.key, required this.blogUrl});
-
-  @override
-  Widget build (BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Row(
-        children: [
-          Text("Ratten"),
-          Text("News", style: TextStyle(color: Colors.deepOrangeAccent),)
-        ],
-      ),
-      centerTitle: true,
-    ),
-  );
-}

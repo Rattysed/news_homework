@@ -1,24 +1,33 @@
-import '../models/category_model.dart';
+import 'package:news_homework/models/category_model.dart';
 
 List<CategoryModel> getCategories() {
 
   List<CategoryModel> categories = List<CategoryModel>.empty(growable: true);
 
-  CategoryModel categoryModel = CategoryModel();
-  categoryModel.categoryName = "Business";
-  categories.add(categoryModel);
+  CategoryModel category = CategoryModel();
+  category.categoryName = "Science";
+  categories.add(category);
+  
+  category = CategoryModel();
+  category.categoryName = "Business";
+  categories.add(category);
 
-  categoryModel = CategoryModel();
-  categoryModel.categoryName = "General";
-  categories.add(categoryModel);
+  category = CategoryModel();
+  category.categoryName = "Business";
+  categories.add(category);
 
-  categoryModel = CategoryModel();
-  categoryModel.categoryName = "Sports";
-  categories.add(categoryModel);
+  category = CategoryModel();
+  category.categoryName = "General";
+  categories.add(category);
 
-  categoryModel = CategoryModel();
-  categoryModel.categoryName = "Technology";
-  categories.add(categoryModel);
+  category = CategoryModel();
+  category.categoryName = "Sports";
+  categories.add(category);
+
+  category = CategoryModel();
+  category.categoryName = "Technology";
+  categories.add(category);
+  
 
   return categories;
 }

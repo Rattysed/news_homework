@@ -5,6 +5,7 @@ const primaryColor = Color(0xfff82810);
 final darkTheme = ThemeData(
   primaryColor: primaryColor,
   useMaterial3: true,
+  cardColor: Colors.white54,
   textTheme: textTheme,
   scaffoldBackgroundColor: Colors.black87,
   colorScheme: ColorScheme.fromSeed(
@@ -14,6 +15,7 @@ final darkTheme = ThemeData(
 final lightTheme = ThemeData(
   primaryColor: primaryColor,
   useMaterial3: true,
+  cardColor: Colors.black26,
   textTheme: textTheme,
   scaffoldBackgroundColor: Colors.white,
   colorScheme: ColorScheme.fromSeed(

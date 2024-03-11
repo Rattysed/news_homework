@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../models/article_model.dart';
-import '../helper/news.dart';
+import 'package:news_homework/widgets/my_appbar.dart';
+import 'package:news_homework/models/article_model.dart';
+import 'package:news_homework/helper/news.dart';
 
 import 'home.dart' show BlogTile;
 
@@ -17,7 +18,7 @@ class CategoryNews extends StatefulWidget {
 class _CategoryNewsState extends State<CategoryNews> {
   late final List<ArticleModel> articles;
   bool _loading = true;
-  
+
   @override
   void initState() {
     super.initState();
@@ -33,41 +34,48 @@ class _CategoryNewsState extends State<CategoryNews> {
       _loading = false;
     });
   }
-  
+
   @override
-  Widget build (BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Row(
-        children: <Widget>[
-          Text("Ratten"),
-          Text("News", style: TextStyle(color: Colors.orangeAccent),)
-        ],
-      ),
-    ),
-    body: _loading
-        ?
-    const Center(child: CircularProgressIndicator(),)
-        :
-    SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.only(top: 16),
-            child: ListView.builder(
-                itemCount: articles.length,
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                itemBuilder: (context, index) => BlogTile(
-                  imgUrl: articles[index].urlToImage,
-                  title: articles[index].title,
-                  desc: articles[index].description,
-                  url: articles[index].url,
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Text("Ratten"),
+                Text(
+                  "News",
+                  style: TextStyle(color: Colors.orangeAccent),
                 )
+              ],
             ),
-          ),
-        ],
+            ToggleButtonsSample(),
+          ],
+        ),
       ),
-    )
-  );
+      body: _loading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: ListView.builder(
+                        itemCount: articles.length,
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemBuilder: (context, index) => BlogTile(
+                              imgUrl: articles[index].urlToImage,
+                              title: articles[index].title,
+                              desc: articles[index].description,
+                              url: articles[index].url,
+                            )),
+                  ),
+                ],
+              ),
+            ));
 }
