@@ -39,8 +39,8 @@ class _CategoryNewsState extends State<CategoryNews> {
     appBar: AppBar(
       title: const Row(
         children: <Widget>[
-          Text("Any"),
-          Text("News", style: TextStyle(color: Colors.greenAccent),)
+          Text("Ratten"),
+          Text("News", style: TextStyle(color: Colors.orangeAccent),)
         ],
       ),
     ),

@@ -3,8 +3,11 @@ import 'package:news_homework/helper/data.dart';
 import 'package:news_homework/models/category_model.dart';
 import 'package:news_homework/views/article_view.dart';
 import 'package:news_homework/views/category_news.dart';
-import '../helper/news.dart';
-import '../models/article_model.dart';
+
+import 'package:news_homework/helper/news.dart';
+import 'package:news_homework/models/article_model.dart';
+
+import 'package:news_homework/widgets/my_appbar.dart';
 
 import 'package:flutter/material.dart';
 
@@ -39,117 +42,127 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  Widget build (BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Row(
-        children: <Widget>[
-          Text("Any"),
-          Text("News", style: TextStyle(color: Colors.greenAccent),)
-        ],
-      ),
-    ),
-    body: _loading
-        ?
-    const Center(child: CircularProgressIndicator(),)
-        :
-    SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: <Widget>[
-
-          /// Categories
-          SizedBox(
-            height: 64,
-            child: ListView.builder(
-                itemCount: categories.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => CategoryTile(
-                    imgUrl: categories[index].imgUrl,
-                    categoryName: categories[index].categoryName,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+            Row(
+              children: <Widget>[
+                Text("Ratten"),
+                Text(
+                  "News",
+                  style: TextStyle(color: Colors.orangeAccent),
                 )
+              ],
             ),
-          ),
+            ToggleButtonsSample(),
+          ],),
 
-          /// Blogs
-          Container(
-            padding: const EdgeInsets.only(top: 16),
-            child: ListView.builder(
-                itemCount: articles.length,
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                itemBuilder: (context, index) => BlogTile(
-                    imgUrl: articles[index].urlToImage,
-                    title: articles[index].title,
-                    desc: articles[index].description,
-                    url: articles[index].url,
-                )
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
+        ),
+        body: _loading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: <Widget>[
+                    /// Categories
+                    SizedBox(
+                      height: 64,
+                      child: ListView.builder(
+                          itemCount: categories.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => CategoryTile(
+                                categoryName: categories[index].categoryName,
+                              )),
+                    ),
+
+                    /// Blogs
+                    Container(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: ListView.builder(
+                          itemCount: articles.length,
+                          shrinkWrap: true,
+                          physics: const ClampingScrollPhysics(),
+                          itemBuilder: (context, index) => BlogTile(
+                                imgUrl: articles[index].urlToImage,
+                                title: articles[index].title,
+                                desc: articles[index].description,
+                                url: articles[index].url,
+                              )),
+                    ),
+                  ],
+                ),
+              ),
+      );
 }
 
 class CategoryTile extends StatelessWidget {
-  final String? imgUrl, categoryName;
+  final String? categoryName;
 
-  const CategoryTile({super.key, this.imgUrl, this.categoryName});
+  const CategoryTile({super.key, this.categoryName});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-    onTap: (){
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => CategoryNews(category: categoryName!.toLowerCase())
-      )
-      );
-    },
-    child: Container(
-      margin: const EdgeInsets.only(right: 16),
-      child: Stack(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(imgUrl!, width: 116, height: 64, fit: BoxFit.cover,),
-          ),
-          Container(
-            alignment: Alignment.center,
-            width: 116, height: 64,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.black26,
-            ),
-            child: Text(categoryName!,
-              style:
-              const TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      CategoryNews(category: categoryName!.toLowerCase())));
+        },
+        child: Container(
+          margin: const EdgeInsets.only(right: 16),
+          child: Stack(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
               ),
-            ),
-          )
-        ],
-      ),
-    ),
-  );
+              Container(
+                alignment: Alignment.center,
+                width: 116,
+                height: 64,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.black26,
+                ),
+                child: Text(
+                  categoryName!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      );
 }
 
 class BlogTile extends StatelessWidget {
   final String? imgUrl, title, desc, url;
 
-  const BlogTile({super.key, required this.imgUrl, required this.title, required this.desc, required this.url});
+  const BlogTile(
+      {super.key,
+      required this.imgUrl,
+      required this.title,
+      required this.desc,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(
-            builder: (context) => ArticleView(
-                blogUrl: url!,
-            )
-          )
-        );
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ArticleView(
+                      blogUrl: url!,
+                    )));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
@@ -157,7 +170,7 @@ class BlogTile extends StatelessWidget {
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-                child: Image.network(imgUrl!),
+              child: Image.network(imgUrl!),
             ),
             Text(
               title!,
@@ -166,7 +179,9 @@ class BlogTile extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             Text(
               desc!,
             ),
