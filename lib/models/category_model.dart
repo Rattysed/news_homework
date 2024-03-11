@@ -1,4 +1,4 @@
 final class CategoryModel {
   late String categoryName;
-  late String imgUrl;
+  // TODO: Add some properties
 }
