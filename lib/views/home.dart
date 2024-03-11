@@ -7,7 +7,7 @@ import 'package:news_homework/views/category_news.dart';
 import 'package:news_homework/helper/news.dart';
 import 'package:news_homework/models/article_model.dart';
 
-import 'package:news_homework/widgets/my_appbar.dart';
+import 'package:news_homework/widgets/theme_button.dart';
 
 import 'package:flutter/material.dart';
 
@@ -44,20 +44,21 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          title: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            Row(
-              children: <Widget>[
-                Text("Ratten"),
-                Text(
-                  "News",
-                  style: TextStyle(color: Colors.orangeAccent),
-                )
-              ],
-            ),
-            ToggleButtonsSample(),
-          ],),
-
+              Row(
+                children: <Widget>[
+                  Text("Ratten"),
+                  Text(
+                    "News",
+                    style: TextStyle(color: Colors.orangeAccent),
+                  )
+                ],
+              ),
+              ToggleButtonsSample(),
+            ],
+          ),
         ),
         body: _loading
             ? const Center(
@@ -91,6 +92,7 @@ class _HomeState extends State<Home> {
                                 title: articles[index].title,
                                 desc: articles[index].description,
                                 url: articles[index].url,
+                                content: articles[index].content,
                               )),
                     ),
                   ],
@@ -144,14 +146,15 @@ class CategoryTile extends StatelessWidget {
 }
 
 class BlogTile extends StatelessWidget {
-  final String? imgUrl, title, desc, url;
+  final String? imgUrl, title, desc, url, content;
 
   const BlogTile(
       {super.key,
       required this.imgUrl,
       required this.title,
       required this.desc,
-      required this.url});
+      required this.url,
+      required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +164,11 @@ class BlogTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => ArticleView(
-                      blogUrl: url!,
+                      imageUrl: imgUrl!,
+                      title: title!,
+                      url: url!,
+                      description: desc!,
+                      content: content,
                     )));
       },
       child: Container(

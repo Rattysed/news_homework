@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:news_homework/widgets/my_appbar.dart';
+import 'package:news_homework/widgets/theme_button.dart';
 import 'package:news_homework/models/article_model.dart';
 import 'package:news_homework/helper/news.dart';
 
@@ -73,6 +73,7 @@ class _CategoryNewsState extends State<CategoryNews> {
                               title: articles[index].title,
                               desc: articles[index].description,
                               url: articles[index].url,
+                              content: articles[index].content,
                             )),
                   ),
                 ],

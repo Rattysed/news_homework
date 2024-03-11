@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class News {
   final List<ArticleModel> news = List<ArticleModel>.empty(growable: true);
 
-  final String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=01225cf14dda47239c7192a2c3d7c423";
+  final String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=$apiKey";
 
   Future<void> getNews() async {
     var response = await http.get(Uri.parse(url));
@@ -25,6 +25,7 @@ class News {
            url: current['url'],
            urlToImage: current['urlToImage'],
            publishedAt: DateTime.parse(current['publishedAt']),
+           content: current['content']
          );
 
          news.add(articleModel);
@@ -54,6 +55,7 @@ class CatNews {
             url: current['url'],
             urlToImage: current['urlToImage'],
             publishedAt: DateTime.parse(current['publishedAt']),
+            content: current['content']
           );
 
           news.add(articleModel);

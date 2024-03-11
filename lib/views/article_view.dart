@@ -1,65 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:news_homework/widgets/error_image.dart';
+import "package:news_homework/widgets/theme_button.dart";
 
-class ArticleView extends StatefulWidget {
-  final String blogUrl;
+class ArticleView extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+  final String description;
+  final String url;
+  final String? content;
 
-  const ArticleView({super.key, required this.blogUrl});
+  const ArticleView(
+      {super.key,
+        required this.imageUrl,
+        required this.title,
+        required this.description,
+        required this.url,
+        required this.content});
 
-  @override
-  State<ArticleView> createState() => _ArticleViewState();
-}
-
-class _ArticleViewState extends State<ArticleView> {
-  int loadingPercentage = 0;
-  late final WebViewController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = WebViewController()
-      ..setNavigationDelegate(NavigationDelegate(
-        onPageStarted: (url) {
-          setState(() {
-            loadingPercentage = 0;
-          });
-        },
-        onProgress: (progress) {
-          setState(() {
-            loadingPercentage = progress;
-          });
-        },
-        onPageFinished: (url) {
-          setState(() {
-            loadingPercentage = 100;
-          });
-        },
-      ))
-      ..loadRequest(
-        Uri.parse(widget.blogUrl),
-      );
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   @override
-  Widget build (BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Row(
-        children: <Widget>[
-          Text("Any"),
-          Text("News", style: TextStyle(color: Colors.greenAccent),)
-        ],
-      ),
-    ),
-    body: Stack(
-      children: [
-        WebViewWidget(
-          controller: controller,
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Feed", style: TextStyle(color: Colors.orangeAccent)),
+                ],
+              ),
+              ToggleButtonsSample()
+            ],
+          )
         ),
-        if (loadingPercentage < 100)
-          LinearProgressIndicator(
-            value: loadingPercentage / 100.0,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Center(
+                  child: Image.network(imageUrl, errorBuilder:
+                      (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return const ErrorImage();
+                  }),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  (content != null) ? content! : "",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: MaterialButton(
+                    color: Colors.blue,
+                    onPressed: _launchUrl,
+                    child: Text(
+                      "More...",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
-      ],
-    ),
-  );
+        ));
+  }
 }
