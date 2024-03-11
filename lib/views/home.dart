@@ -1,7 +1,8 @@
 import 'package:news_homework/helper/data.dart';
 
 import 'package:news_homework/models/category_model.dart';
-import 'package:news_homework/views/article_view.dart';
+import 'package:news_homework/theme/theme.dart';
+import 'package:news_homework/widgets/article_tile.dart' show ArticleTile;
 import 'package:news_homework/views/category_news.dart';
 
 import 'package:news_homework/helper/news.dart';
@@ -52,11 +53,11 @@ class _HomeState extends State<Home> {
                   Text("Ratten"),
                   Text(
                     "News",
-                    style: TextStyle(color: Colors.orangeAccent),
+                    style: TextStyle(color: primaryColor),
                   )
                 ],
               ),
-              ToggleButtonsSample(),
+              ToggleThemeButton(),
             ],
           ),
         ),
@@ -67,7 +68,7 @@ class _HomeState extends State<Home> {
             : SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
-                  children: <Widget>[
+                  children: [
                     /// Categories
                     SizedBox(
                       height: 64,
@@ -87,7 +88,7 @@ class _HomeState extends State<Home> {
                           itemCount: articles.length,
                           shrinkWrap: true,
                           physics: const ClampingScrollPhysics(),
-                          itemBuilder: (context, index) => BlogTile(
+                          itemBuilder: (context, index) => ArticleTile(
                                 imgUrl: articles[index].urlToImage,
                                 title: articles[index].title,
                                 desc: articles[index].description,
@@ -145,56 +146,3 @@ class CategoryTile extends StatelessWidget {
       );
 }
 
-class BlogTile extends StatelessWidget {
-  final String? imgUrl, title, desc, url, content;
-
-  const BlogTile(
-      {super.key,
-      required this.imgUrl,
-      required this.title,
-      required this.desc,
-      required this.url,
-      required this.content});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ArticleView(
-                      imageUrl: imgUrl!,
-                      title: title!,
-                      url: url!,
-                      description: desc!,
-                      content: content,
-                    )));
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        child: Column(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(imgUrl!),
-            ),
-            Text(
-              title!,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              desc!,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

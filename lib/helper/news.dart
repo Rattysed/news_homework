@@ -24,7 +24,6 @@ class News {
            description: current['description'],
            url: current['url'],
            urlToImage: current['urlToImage'],
-           publishedAt: DateTime.parse(current['publishedAt']),
            content: current['content']
          );
 
@@ -54,7 +53,6 @@ class CatNews {
             description: current['description'],
             url: current['url'],
             urlToImage: current['urlToImage'],
-            publishedAt: DateTime.parse(current['publishedAt']),
             content: current['content']
           );
 

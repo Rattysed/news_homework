@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:news_homework/theme/theme.dart';
 
 import 'package:news_homework/widgets/theme_button.dart';
 import 'package:news_homework/models/article_model.dart';
 import 'package:news_homework/helper/news.dart';
 
-import 'home.dart' show BlogTile;
+import 'package:news_homework/widgets/article_tile.dart' show ArticleTile;
 
 class CategoryNews extends StatefulWidget {
   final String category;
@@ -46,11 +47,11 @@ class _CategoryNewsState extends State<CategoryNews> {
                 Text("Ratten"),
                 Text(
                   "News",
-                  style: TextStyle(color: Colors.orangeAccent),
+                  style: TextStyle(color: primaryColor),
                 )
               ],
             ),
-            ToggleButtonsSample(),
+            ToggleThemeButton(),
           ],
         ),
       ),
@@ -61,14 +62,14 @@ class _CategoryNewsState extends State<CategoryNews> {
           : SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
-                children: <Widget>[
+                children: [
                   Container(
                     padding: const EdgeInsets.only(top: 16),
                     child: ListView.builder(
                         itemCount: articles.length,
                         shrinkWrap: true,
                         physics: const ClampingScrollPhysics(),
-                        itemBuilder: (context, index) => BlogTile(
+                        itemBuilder: (context, index) => ArticleTile(
                               imgUrl: articles[index].urlToImage,
                               title: articles[index].title,
                               desc: articles[index].description,

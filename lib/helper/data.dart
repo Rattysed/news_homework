@@ -9,11 +9,11 @@ List<CategoryModel> getCategories() {
   categories.add(category);
   
   category = CategoryModel();
-  category.categoryName = "Business";
+  category.categoryName = "Entertainment";
   categories.add(category);
 
   category = CategoryModel();
-  category.categoryName = "Business";
+  category.categoryName = "Health";
   categories.add(category);
 
   category = CategoryModel();
@@ -21,13 +21,8 @@ List<CategoryModel> getCategories() {
   categories.add(category);
 
   category = CategoryModel();
-  category.categoryName = "Sports";
-  categories.add(category);
-
-  category = CategoryModel();
   category.categoryName = "Technology";
   categories.add(category);
-  
 
   return categories;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_homework/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:news_homework/widgets/error_image.dart';
 import "package:news_homework/widgets/theme_button.dart";
@@ -12,11 +13,11 @@ class ArticleView extends StatelessWidget {
 
   const ArticleView(
       {super.key,
-        required this.imageUrl,
-        required this.title,
-        required this.description,
-        required this.url,
-        required this.content});
+      required this.imageUrl,
+      required this.title,
+      required this.description,
+      required this.url,
+      required this.content});
 
   Future<void> _launchUrl() async {
     if (!await launchUrl(Uri.parse(url))) {
@@ -28,19 +29,19 @@ class ArticleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Feed", style: TextStyle(color: Colors.orangeAccent)),
-                ],
-              ),
-              ToggleButtonsSample()
-            ],
-          )
-        ),
+            title: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Feed",
+                    style: TextStyle(color: primaryColor)),
+              ],
+            ),
+            ToggleThemeButton()
+          ],
+        )),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +51,7 @@ class ArticleView extends StatelessWidget {
                 child: Center(
                   child: Image.network(imageUrl, errorBuilder:
                       (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
+                          StackTrace? stackTrace) {
                     return const ErrorImage();
                   }),
                 ),
@@ -73,10 +74,10 @@ class ArticleView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: MaterialButton(
-                    color: Colors.blue,
+                    color: Theme.of(context).primaryColor,
                     onPressed: _launchUrl,
                     child: Text(
-                      "More...",
+                      "Read More",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),

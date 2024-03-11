@@ -7,14 +7,14 @@ const List<Widget> themes = [
   Text('Dark'),
 ];
 
-class ToggleButtonsSample extends StatefulWidget {
-  const ToggleButtonsSample({super.key});
+class ToggleThemeButton extends StatefulWidget {
+  const ToggleThemeButton({super.key});
 
   @override
-  State<ToggleButtonsSample> createState() => _ToggleButtonsSampleState();
+  State<ToggleThemeButton> createState() => _ToggleThemeButtonState();
 }
 
-class _ToggleButtonsSampleState extends State<ToggleButtonsSample> {
+class _ToggleThemeButtonState extends State<ToggleThemeButton> {
   late bool _selectedTheme;
 
   @override
